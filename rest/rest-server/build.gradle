@@ -63,6 +63,8 @@ dependencies {
     runtime 'org.eclipse.jetty:jetty-webapp:9.2.14.v20151106'
 
     runtime "org.objectweb.proactive:programming-extension-pamr:${programmingVersion}"
+
+    compile 'org.eclipse.jetty:jetty-servlets:9.2.14.v20151106'
 }
 
 task stub(type: StubTask) {
@@ -72,6 +74,12 @@ task stub(type: StubTask) {
 test {
     exclude 'functionaltests/**'
 }
+
+configurations.all {
+    resolutionStrategy.cacheDynamicVersionsFor 4, 'minutes'
+    resolutionStrategy.cacheChangingModulesFor 4, 'minutes'
+}
+
 
 task('functionalTest', type: Test).configure functionalTestConfiguration
 
